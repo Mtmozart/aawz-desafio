@@ -1,7 +1,7 @@
 <script lang="ts">
 import { useStore } from '@/store';
 import { DELETE_USER_API, GET_USERS_API } from '@/store/actions-type';
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import DeleteIcon from 'vue-material-design-icons/Delete.vue';
 
 
@@ -29,8 +29,31 @@ export default defineComponent({
   setup(){
     const store = useStore();
     store.dispatch(GET_USERS_API)
+    const users = computed(() => store.state.users);
+    const currentPage = ref(1);
+    const itemsPerPage = 10;
+
+    const totalPages = computed(() => Math.ceil(users.value.length / itemsPerPage));
+
+    const paginatedUsers = computed(() => {
+      const start = (currentPage.value - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      return users.value.slice(start, end);
+    });
+
+    const nextPage = () => {
+      if (currentPage.value < totalPages.value) currentPage.value++;
+    };
+    const prevPage = () => {
+      if (currentPage.value > 1) currentPage.value--;
+    };
+
     return {
-      users: computed(() =>store.state.users),
+      paginatedUsers,
+      currentPage,
+      totalPages,
+      nextPage,
+      prevPage,
       store
     }
 
@@ -56,7 +79,7 @@ export default defineComponent({
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in users" :key="user.id">
+        <tr v-for="user in paginatedUsers" :key="user.id">
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.address.street }}</td>
@@ -66,14 +89,20 @@ export default defineComponent({
           <td>{{ user.address.state }}</td>
           <td>{{ user.address.postalCode }}</td>
           <td>{{ user.address.complement || 'N/A' }}</td>
-          <td class="button-delete">
+          <td>
             <button @click="deleteUser(user.id)">
               <DeleteIcon />
             </button>
-          </td>  </tr>
-        
+          </td>
+        </tr>        
       </tbody>
+      
     </table>
+    <div class="pagination-controls">
+      <button @click="prevPage" :disabled="currentPage === 1"><strong>Anterior</strong></button>
+      <span>Página {{ currentPage }} de {{ totalPages }}</span>
+      <button @click="nextPage" :disabled="currentPage === totalPages"><strong>Próxima</strong></button>
+    </div>  
   </section>
 </template>
 
@@ -115,9 +144,26 @@ td {
   color: var(--preto);
 }
 
+td button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent; 
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+td button:hover {
+  background-color: rgba(0, 0, 0, 0.1); 
+  border-radius: 4px; 
+}
 section {
   padding: 16px;
 }
+
+
 .button-delete {
   display: flex;
   align-items: center;
@@ -126,5 +172,22 @@ section {
 
 .button-delete button {
  cursor: pointer;
+}
+
+.pagination-controls {  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--verde);
+}
+
+.pagination-controls button {
+  margin: 0 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.pagination-controls button:hover {
+  text-decoration: underline;
 }
 </style>
