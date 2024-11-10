@@ -1,0 +1,3 @@
+export const REGISTER_USER = 'REGISTER_USER'
+export const DEFINE_USER = 'DEFINE_USER'
+export const EXCLUDE_USER = 'EXCLUDE_USER'

@@ -1,0 +1,3 @@
+export const REGISTRAR_USER_API = 'REGISTRAR_USER_API'
+export const GET_USERS_API = 'GET_USERS_API'
+export const DELETE_USER_API = 'DELETE_USER_API'
