@@ -1,3 +1,4 @@
+import ChartView from "@/views/ChartView.vue";
 import RegisterUserVue from "@/views/RegisterUserVue.vue";
 import TableUserView from "@/views/TableUserView.vue";
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
@@ -12,6 +13,11 @@ const routes: RouteRecordRaw[] = [
     path: '/users-table',
     name: 'UsersTable',
     component: TableUserView,
+  },
+  {
+    path: '/charts',
+    name: 'Charts',
+    component: ChartView,
   }
 ];
 

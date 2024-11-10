@@ -7,6 +7,7 @@
       <ul>
         <li> <router-link to="/">Registrar</router-link></li>
         <li> <router-link to="/users-table">Dados</router-link></li>
+        <li> <router-link to="/charts">Gráficos detalhados</router-link></li>
       </ul>
     </nav>
   </header>

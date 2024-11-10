@@ -31,6 +31,7 @@ export default createStore<State>({
           country: userDto.address.country,
           postalCode: userDto.address.postalCode,
           state: userDto.address.state,
+          region: userDto.address.region,
           complement: userDto.address.complement,
         }
       }

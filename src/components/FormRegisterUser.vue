@@ -17,7 +17,7 @@ export default defineComponent({
     zipCodeMask() {
       this.data.postalCode = zipCodeMask(this.data.postalCode);
       if(this.data.postalCode.length == 9){
-        const address = this.findAddressByCep(this.data.postalCode)
+        this.findAddressByCep(this.data.postalCode)
       }
       
     },
@@ -35,6 +35,7 @@ export default defineComponent({
           this.data.country = addressData.data.pais;
           this.data.complement = addressData.data.complemento;
           this.data.country = 'Brasil'
+          this.data.region = addressData.data.regiao;
         } 
       } catch (error) {
        console.log(error)
@@ -55,6 +56,7 @@ export default defineComponent({
       data.state = '';
       data.postalCode = '';
       data.country = '';
+      data.region = ''; 
       v.value.$reset(); 
       submitted.value = false; 
     };
@@ -69,7 +71,8 @@ export default defineComponent({
       city: '',
       state: '',
       postalCode: '',
-      country: ''      
+      country: '',
+      region: ''
     });
 
     const rules = {
@@ -107,7 +110,8 @@ export default defineComponent({
             state: data.state,
             postalCode: data.postalCode,
             country: data.country,
-            complement: data.complement
+            complement: data.complement,
+            region: data.region 
           }
         };
         store.dispatch(REGISTRAR_USER_API, newUser)

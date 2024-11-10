@@ -10,6 +10,7 @@ export interface IUser {
     state: StateEnum;
     postalCode: string;
     country: string;
+    region: string;
     complement?: string;
   };
 }
@@ -26,6 +27,7 @@ export interface IUserCreate {
     state: StateEnum;
     postalCode: string;
     country: string;
+    region: string;
   };
 }
 

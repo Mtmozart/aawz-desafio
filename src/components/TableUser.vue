@@ -17,8 +17,7 @@ export default defineComponent({
         return;
       }
       
-      try {
-       
+      try {       
         await this.store.dispatch(DELETE_USER_API, id);
         console.log(`Usuário com ID ${id} deletado com sucesso.`);
       } catch (error) {
@@ -28,7 +27,6 @@ export default defineComponent({
   },
   setup(){
     const store = useStore();
-    store.dispatch(GET_USERS_API)
     const users = computed(() => store.state.users);
     const currentPage = ref(1);
     const itemsPerPage = 10;
@@ -100,7 +98,7 @@ export default defineComponent({
     </table>
     <div class="pagination-controls">
       <button @click="prevPage" :disabled="currentPage === 1"><strong>Anterior</strong></button>
-      <span>Página {{ currentPage }} de {{ totalPages }}</span>
+      <span><strong>Página</strong> {{ currentPage }} de   {{ totalPages }}</span>
       <button @click="nextPage" :disabled="currentPage === totalPages"><strong>Próxima</strong></button>
     </div>  
   </section>
