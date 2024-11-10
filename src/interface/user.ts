@@ -2,6 +2,7 @@ export interface IUser {
   id: string;
   name: string;
   email: string;
+  origin: string;
   address: {
     street: string;
     number: string;
@@ -18,6 +19,7 @@ export interface IUser {
 export interface IUserCreate {
   name: string;
   email: string;
+  origin: string;
   address: {
     street: string;
     number: string;
@@ -34,6 +36,7 @@ export interface IUserCreate {
 export interface IUserForm {
   name: string;
   email: string;
+  origin: string;
   street: string;
   number: string;
   complement?: string;

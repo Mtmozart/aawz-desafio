@@ -23,6 +23,7 @@ export default createStore<State>({
         id: new Date().toISOString(),
         name: userDto.name,
         email: userDto.email,
+        origin: userDto.origin,
         address: {
           street: userDto.address.street,
           number: userDto.address.number,
@@ -36,7 +37,6 @@ export default createStore<State>({
         }
       }
       state.users.push(user)
-      console.log(state.users)
     },
     [DEFINE_USER](state, users: IUser[]) {
       state.users = users;
@@ -51,7 +51,7 @@ export default createStore<State>({
         .then(response => console.log(response.data))
     },
     [GET_USERS_API]({ commit }) {
-      clientHttp.get('/users')
+      return clientHttp.get('/users')
         .then(response => commit(DEFINE_USER, response.data))
     },
     [DELETE_USER_API]({ commit }, id: string) {

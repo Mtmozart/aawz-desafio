@@ -2,6 +2,8 @@
 import { defineComponent } from 'vue';
 import FormRegisterUser from './FormRegisterUser.vue';
 
+
+
 export default defineComponent({
   name: 'RegisterUser',
   components: { FormRegisterUser},

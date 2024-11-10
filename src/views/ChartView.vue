@@ -3,11 +3,12 @@ import { defineComponent } from 'vue';
 import BarChart from "@/components/Bar.vue"
 import DoughnutChart from "@/components/Doughnut.vue"
 import DataUsers from "@/components/DataUsers.vue"
+import DoughnutChartOrigin from "@/components/DoughnutUserOrigin.vue"
 
 export default defineComponent({
   name: 'ChartView',
   components: {  
-    BarChart, DoughnutChart, DataUsers
+    BarChart, DoughnutChart, DataUsers, DoughnutChartOrigin
   },
 });
 </script>
@@ -19,6 +20,7 @@ export default defineComponent({
     </div>
     <BarChart />
     <DoughnutChart />
+    <DoughnutChartOrigin />
   </section> 
 </template>
 

@@ -3,6 +3,7 @@ import { useStore } from '@/store';
 import { DELETE_USER_API, GET_USERS_API } from '@/store/actions-type';
 import { computed, defineComponent, ref } from 'vue';
 import DeleteIcon from 'vue-material-design-icons/Delete.vue';
+import { toast } from 'vue3-toastify';
 
 
 export default defineComponent({
@@ -19,15 +20,17 @@ export default defineComponent({
       
       try {       
         await this.store.dispatch(DELETE_USER_API, id);
-        console.log(`Usuário com ID ${id} deletado com sucesso.`);
+        toast.success("Usuário deletado com sucesso.")
+        
       } catch (error) {
-        console.error('Erro ao deletar o usuário:', error);
+        toast.error("Erro ao deletar o usuário.")
       }
     }
   },
   setup(){
     const store = useStore();
-    const users = computed(() => store.state.users);
+    store.dispatch('GET_USERS_API');
+    const users = computed(() => store.state.users);  
     const currentPage = ref(1);
     const itemsPerPage = 10;
 
@@ -66,6 +69,7 @@ export default defineComponent({
         <tr>
           <th>Nome</th>
           <th>E-mail</th>
+          <th>Origem</th>
           <th>Rua</th>
           <th>Número</th>
           <th>Bairro</th>
@@ -80,6 +84,7 @@ export default defineComponent({
         <tr v-for="user in paginatedUsers" :key="user.id">
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
+          <td>{{ user.origin }}</td>
           <td>{{ user.address.street }}</td>
           <td>{{ user.address.number }}</td>
           <td>{{ user.address.neighborhood }}</td>

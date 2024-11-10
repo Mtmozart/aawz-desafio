@@ -1,11 +1,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import HeaderApp from './components/HeaderApp.vue';
+import NotificationUser from './components/NotificationUser.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
-    HeaderApp
+    HeaderApp, NotificationUser
   },
 });
 </script>
@@ -13,6 +14,7 @@ export default defineComponent({
 <template>
   <HeaderApp />
   <main>
+    <NotificationUser />
     <router-view></router-view>    
   </main>
 

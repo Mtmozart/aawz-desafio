@@ -9,6 +9,7 @@ import { email, minLength, required } from '@vuelidate/validators';
 import { computed, defineComponent, reactive, ref } from 'vue';
 import { v4 as uuidv4 } from 'uuid';
 import { StateEnum } from '@/interface/user';
+import { toast } from 'vue3-toastify';
 
 export default defineComponent({
   name: "FormRegisterUser",
@@ -36,9 +37,10 @@ export default defineComponent({
           this.data.complement = addressData.data.complemento;
           this.data.country = 'Brasil'
           this.data.region = addressData.data.regiao;
+          toast.success('Dados buscado com sucesso.')
         } 
       } catch (error) {
-       console.log(error)
+        toast.error('Erro ao buscar o endereço.')
       }
     },
   },
@@ -48,6 +50,7 @@ export default defineComponent({
     const resetForm = () => {
       data.name = '';
       data.email = '';
+      data.origin = ''
       data.street = '';
       data.number = '';
       data.complement = '';
@@ -64,6 +67,7 @@ export default defineComponent({
     const data = reactive({
       name: '',
       email: '',
+      origin: '',
       street: '',
       number: '',
       complement: '',
@@ -78,14 +82,14 @@ export default defineComponent({
     const rules = {
       name: { required, minLength: minLength(3) },
       email: { required, email },
-        street: { required },
-        number: { required },
-        complement: { required },
-        neighborhood: { required },
-        city: { required },
-        state: { required },
-        postalCode: { required },
-        country: { required }
+      origin: { required },
+      street: { required },
+      number: { required },
+      neighborhood: { required },
+      city: { required },
+      state: { required },
+      postalCode: { required },
+      country: { required }
     };
 
     const v = useVuelidate(rules, data);
@@ -102,6 +106,7 @@ export default defineComponent({
           id: uuidv4(),
           name: data.name,
           email: data.email,
+          origin: data.origin,
           address: {            
             street: data.street,
             number: data.number,
@@ -116,9 +121,9 @@ export default defineComponent({
         };
         store.dispatch(REGISTRAR_USER_API, newUser)
         resetForm()
-        console.log("Usuário registrado");
+        toast.success("Usuário registrado com sucesso.")
       } else {
-        console.log("Formulário inválido");
+        toast.error("Formulário inválido, verifique os campos")       
       }
     };
 
@@ -155,6 +160,18 @@ export default defineComponent({
           E-mail é obrigatório e inválido.
         </div>
       </div>
+      <div>
+         <label for="origin">Origem do usuário:</label>
+         <select id="origin" v-model="data.origin" @blur="onBlur('origin')">
+              <option value="" disabled>Selecione a origem</option>
+              <option value="digital">Digital</option>
+              <option value="física">Física</option>
+          </select>
+           <div v-if="!v.$pending && v.origin.$dirty && !v.origin.$pending && v.origin.$invalid" class="error">
+              Origem é obrigatória.
+           </div>
+      </div>
+
 
       <div>
         <label for="postalCode">CEP:</label>
@@ -186,10 +203,8 @@ export default defineComponent({
 
       <div>
         <label for="complement">Complemento:</label>
-        <input type="text" id="complement" v-model="data.complement" placeholder="Digite o complemento" @blur="onBlur('complement')"/>
-        <div v-if="!v.$pending && v.complement.$dirty && !v.complement.$pending && v.complement.$invalid" class="error">
-          Complemento é obrigatório.
-        </div>
+        <input type="text" id="complement" v-model="data.complement" placeholder="Digite o complemento"/>
+       
       </div>
 
       <div>
@@ -208,7 +223,7 @@ export default defineComponent({
         </div>
       </div>
 
-      <div>
+  <div>
   <label for="state">Estado:</label>
   <select id="state" v-model="data.state" @blur="onBlur('state')">
       <option value="" disabled>Selecione o estado</option>
@@ -219,7 +234,7 @@ export default defineComponent({
   <div v-if="!v.$pending && v.state.$dirty && !v.state.$pending && v.state.$invalid" class="error">
     Estado é obrigatório.
   </div>
-</div>
+  </div>
 
       <div>
         <label for="country">País:</label>
