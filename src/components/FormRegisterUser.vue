@@ -123,7 +123,7 @@ export default defineComponent({
         resetForm()
         toast.success("Usuário registrado com sucesso.")
       } else {
-        toast.error("Formulário inválido, verifique os campos")       
+        toast.error("Formulário inválido, verifique os campos.")       
       }
     };
 
