@@ -171,8 +171,6 @@ export default defineComponent({
               Origem é obrigatória.
            </div>
       </div>
-
-
       <div>
         <label for="postalCode">CEP:</label>
         <input type="text" id="postalCode" v-model="data.postalCode" placeholder="Digite o CEP" 
@@ -184,7 +182,6 @@ export default defineComponent({
           CEP é obrigatório.
         </div>
       </div>
-
       <div>
         <label for="street">Rua:</label>
         <input type="text" id="street" v-model="data.street" placeholder="Digite a rua" @blur="onBlur('street')"/>
@@ -192,7 +189,6 @@ export default defineComponent({
           Rua é obrigatória.
         </div>
       </div>
-
       <div>
         <label for="number">Número:</label>
         <input type="text" id="number" v-model="data.number" placeholder="Digite o número" @blur="onBlur('number')"/>
@@ -200,21 +196,17 @@ export default defineComponent({
           Número é obrigatório.
         </div>
       </div>
-
       <div>
         <label for="complement">Complemento:</label>
         <input type="text" id="complement" v-model="data.complement" placeholder="Digite o complemento"/>
-       
       </div>
-
-      <div>
+     <div>
         <label for="neighborhood">Bairro:</label>
         <input type="text" id="neighborhood" v-model="data.neighborhood" placeholder="Digite o bairro" @blur="onBlur('neighborhood')"/>
         <div v-if="!v.$pending && v.neighborhood.$dirty && !v.neighborhood.$pending && v.neighborhood.$invalid" class="error">
           Bairro é obrigatório.
         </div>
       </div>
-
       <div>
         <label for="city">Cidade:</label>
         <input type="text" id="city" v-model="data.city" placeholder="Digite a cidade" @blur="onBlur('city')"/>
@@ -222,20 +214,18 @@ export default defineComponent({
           Cidade é obrigatória.
         </div>
       </div>
-
-  <div>
-  <label for="state">Estado:</label>
-  <select id="state" v-model="data.state" @blur="onBlur('state')">
-      <option value="" disabled>Selecione o estado</option>
-      <option v-for="(name, code) in stateOptions" :key="code" :value="code">
-        {{ name }}
-      </option>
-  </select>
-  <div v-if="!v.$pending && v.state.$dirty && !v.state.$pending && v.state.$invalid" class="error">
-    Estado é obrigatório.
-  </div>
-  </div>
-
+      <div>
+      <label for="state">Estado:</label>
+      <select id="state" v-model="data.state" @blur="onBlur('state')">
+          <option value="" disabled>Selecione o estado</option>
+          <option v-for="(name, code) in stateOptions" :key="code" :value="code">
+            {{ name }}
+          </option>
+      </select>
+      <div v-if="!v.$pending && v.state.$dirty && !v.state.$pending && v.state.$invalid" class="error">
+        Estado é obrigatório.
+      </div>
+      </div>
       <div>
         <label for="country">País:</label>
         <input type="text" id="country" v-model="data.country" placeholder="Digite o país" @blur="onBlur('country')"/>
@@ -243,7 +233,6 @@ export default defineComponent({
           País é obrigatório.
         </div>
       </div>
-
       <div class="button__container">
         <button type="submit">Registrar Usuário</button>
       </div>

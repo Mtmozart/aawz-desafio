@@ -39,18 +39,18 @@ export default defineComponent({
     const usersGroupedByRegion = computed(() => {
   const groupedData: Record<string, number> = {};
   regions.forEach((region) => {
-    groupedData[region] = 0; // Inicializa a contagem de cada região
+    groupedData[region] = 0; 
   });
 
   users.value.forEach((user: IUser) => {
     const region = user.address?.region;
-    // Corrigido: usando Object.prototype.hasOwnProperty.call
+   
     if (region && Object.prototype.hasOwnProperty.call(groupedData, region)) {
-      groupedData[region]++; // Incrementa a contagem para a região
+      groupedData[region]++; 
     }
   });
 
-  console.log(groupedData); // Verifique no console se os dados estão sendo agrupados corretamente
+  console.log(groupedData); 
   return groupedData;
     });
 
