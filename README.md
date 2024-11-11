@@ -39,15 +39,25 @@ Uma tabela apresenta todos os usuários cadastrados, com os seguintes dados:
 
 A tabela é paginada para facilitar a visualização quando há muitos usuários cadastrados.
 
+### 3. Dados
+Existi uma página dedicada com gráficos dos usuários e outras anotações, sendo elas:
+- Distribuição total, e físicos e não físicos
+- Por estado
+- Por região
+- Físico e digitais
+
+A tabela é paginada para facilitar a visualização quando há muitos usuários cadastrados.
+
 ### 4. Roteamento com Vue Router
 O projeto utiliza **Vue Router** para navegar entre as páginas da aplicação:
 - Página inicial com o formulário de cadastro.
-- Página de visualização dos usuários cadastrados e gráficos de distribuição.
+- Página de visualização dos usuários cadastrados.
+-  Página gráficos de distribuição.
 
 ### 5. Testes com Vitest
 Foram implementados testes unitários para validar as funcionalidades do **formulário de cadastro**:
 - Testes de renderização dos campos de formulário.
-- Validações de campos como e-mail, nome e origem.
+- Validações de campos como e-mail, nome e origem e endereço.
 - Feedback visual com notificações de sucesso e erro (via **vue3-toastify**).
 
 ## Instruções de Execução
